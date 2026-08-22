@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>STRUCTURA BIM | Bureau d'Études Structures & BIM</title>
+  <meta name="description" content="Bureau d'études structures et BIM à Toulouse : béton armé, acier, bois, modélisation BIM, Revit, plans de coffrage et d'armatures.">
+
+  <style>
+    :root {
+      --dark: #101827;
+      --dark-2: #172235;
+      --blue: #1976d2;
+      --blue-light: #eaf4ff;
+      --text: #263243;
+      --muted: #657084;
+      --white: #ffffff;
+      --bg: #f5f7fa;
+      --border: #e3e8ef;
+      --radius: 18px;
+      --shadow: 0 15px 40px rgba(16, 24, 39, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1140px, 90%);
+      margin: auto;
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .menu a:hover {
+      color: var(--blue);
+    }
+
+    .lang-switch {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .lang-switch button {
+      border: 0;
+      padding: 7px 10px;
+      cursor: pointer;
+      background: white;
+      font-weight: bold;
+    }
+
+    .lang-switch button.active {
+      background: var(--blue);
+      color: white;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding: 150px 0 80px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(16,24,39,0.97), rgba(23,34,53,0.90)),
+        radial-gradient(circle at 80% 20%, #1976d2, transparent 40%);
+      color: white;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: #72b7ff;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.78rem;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5.3rem);
+      line-height: 1.05;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #69b4ff;
+    }
+
+    .hero-text {
+      max-width: 680px;
+      color: #c9d2df;
+      font-size: 1.15rem;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #125fae;
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.35);
+      color: white;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 35px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+
+    .hero-services {
+      list-style: none;
+    }
+
+    .hero-services li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: #dce5f1;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-light {
+      background: var(--bg);
+    }
+
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 55px;
+    }
+
+    .section-label {
+      color: var(--blue);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 18px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    /* CARDS */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--blue-light);
+      font-size: 1.5rem;
+      margin-bottom: 22px;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* BIM */
+    .bim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .bim-visual {
+      min-height: 420px;
+      border-radius: var(--radius);
+      padding: 40px;
+      background:
+        linear-gradient(145deg, #162236, #263b59);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .wireframe {
+      border: 2px solid rgba(105,180,255,0.7);
+      border-radius: 4px;
+      height: 210px;
+      position: relative;
+      margin: 20px 0;
+      background:
+        linear-gradient(rgba(105,180,255,.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(105,180,255,.18) 1px, transparent 1px);
+      background-size: 35px 35px;
+    }
+
+    .bim-list {
+      list-style: none;
+      margin-top: 25px;
+    }
+
+    .bim-list li {
+      padding: 10px 0 10px 28px;
+      position: relative;
+      color: var(--muted);
+    }
+
+    .bim-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-weight: bold;
+    }
+
+    /* PROJECTS */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project {
+      min-height: 300px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #dce5ef, #aebccc);
+      display: flex;
+      align-items: end;
+    }
+
+    .project:nth-child(2) {
+      background: linear-gradient(135deg, #c8d2db, #788b9d);
+    }
+
+    .project:nth-child(3) {
+      background: linear-gradient(135deg, #d9cfc2, #8f7f70);
+    }
+
+    .project-content {
+      width: 100%;
+      padding: 24px;
+      background: linear-gradient(transparent, rgba(16,24,39,.85));
+      color: white;
+    }
+
+    .project small {
+      color: #9acbff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--blue);
+      font-size: 1.8rem;
+    }
+
+    /* CONTACT */
+    .contact-box {
+      background: var(--dark);
+      color: white;
+      padding: 55px;
+      border-radius: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .contact-box h2 {
+      color: white;
+    }
+
+    .contact-box p {
+      color: #c8d2df;
+    }
+
+    .contact-info {
+      margin-top: 25px;
+    }
+
+    .contact-info p {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #344157;
+      border-radius: 8px;
+      background: #172235;
+      color: white;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    form button {
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0b111c;
+      color: #aeb8c6;
+      padding: 35px 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .bim-grid,
+      .about-grid,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .projects {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .menu {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 70px 0;
+      }
+
+      .grid-3,
+      .projects,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      .contact-box {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="container nav-container">
+    <a href="#home" class="logo">STRUCTURA <span>BIM</span></a>
+
+    <div class="menu">
+      <a href="#home" data-fr="Accueil" data-en="Home">Accueil</a>
+      <a href="#services" data-fr="Prestations" data-en="Services">Prestations</a>
+      <a href="#bim" data-fr="BIM & Revit" data-en="BIM & Revit">BIM & Revit</a>
+      <a href="#projects" data-fr="Réalisations" data-en="Projects">Réalisations</a>
+      <a href="#about" data-fr="À propos" data-en="About">À propos</a>
+      <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
+    </div>
+
+    <div class="lang-switch">
+      <button id="frBtn" class="active">FR</button>
+      <button id="enBtn">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container hero-grid">
+
+    <div>
+      <div class="eyebrow"
+           data-fr="Bureau d'études structures · Toulouse"
+           data-en="Structural Engineering Consultancy · Toulouse">
+        Bureau d'études structures · Toulouse
+      </div>
+
+      <h1
+        data-fr="Concevoir des structures. <span>Construire l'avenir.</span>"
+        data-en="Engineering structures. <span>Building the future.</span>">
+        Concevoir des structures. <span>Construire l'avenir.</span>
+      </h1>
+
+      <p class="hero-text"
+         data-fr="STRUCTURA BIM accompagne les projets de construction grâce à l'ingénierie des structures, la modélisation BIM et la production de plans techniques."
+         data-en="STRUCTURA BIM supports construction projects through structural engineering, BIM modelling and technical documentation.">
+        STRUCTURA BIM accompagne les projets de construction grâce à l'ingénierie des structures, la modélisation BIM et la production de plans techniques.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary"
+           data-fr="Découvrir nos prestations"
+           data-en="Discover our services">
+          Découvrir nos prestations
+        </a>
+
+        <a href="#contact" class="btn btn-outline"
+           data-fr="Parlons de votre projet"
+           data-en="Let's discuss your project">
+          Parlons de votre projet
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3 data-fr="Nos domaines d'expertise" data-en="Our areas of expertise">
+        Nos domaines d'expertise
+      </h3>
+
+      <ul class="hero-services">
+        <li data-fr="Béton armé" data-en="Reinforced concrete">Béton armé</li>
+        <li data-fr="Charpente métallique" data-en="Steel structures">Charpente métallique</li>
+        <li data-fr="Charpente bois" data-en="Timber structures">Charpente bois</li>
+        <li data-fr="Modélisation BIM & Revit" data-en="BIM & Revit modelling">Modélisation BIM & Revit</li>
+        <li data-fr="Plans de coffrage & armatures" data-en="Formwork & reinforcement drawings">Plans de coffrage & armatures</li>
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section class="section-light" id="services">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-label" data-fr="Prestations" data-en="Services">Prestations</div>
+
+      <h2 data-fr="Une expertise technique au service de vos projets"
+          data-en="Technical expertise for your projects">
+        Une expertise technique au service de vos projets
+      </h2>
+
+      <p class="section-intro"
+         data-fr="De la conception à la production des documents techniques, nous intervenons sur les différentes étapes de vos projets de construction."
+         data-en="From design to technical documentation, we support your construction projects at every stage.">
+        De la conception à la production des documents techniques, nous intervenons sur les différentes étapes de vos projets de construction.
+      </p>
+    </div>
+
+    <div class="grid-3">
+
+      <article class="card">
+        <div class="card-icon">🏗️</div>
+        <h3 data-fr="Études béton armé" data-en="Reinforced concrete engineering">Études béton armé</h3>
+        <p data-fr="Conception, modélisation et dimensionnement des structures en béton armé pour les bâtiments."
+           data-en="Design, modelling and structural analysis of reinforced concrete building structures.">
+          Conception, modélisation et dimensionnement des structures en béton armé pour les bâtiments.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">⚙️</div>
+        <h3 data-fr="Structures métalliques" data-en="Steel structures">Structures métalliques</h3>
+        <p data-fr="Étude et dimensionnement des éléments de charpente et structures métalliques."
+           data-en="Structural analysis and design of steel frames and structural elements.">
+          Étude et dimensionnement des éléments de charpente et structures métalliques.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🪵</div>
+        <h3 data-fr="Structures bois" data-en="Timber structures">Structures bois</h3>
+        <p data-fr="Conception et étude des systèmes constructifs et charpentes en bois."
+           data-en="Design and engineering of timber structural systems and frames.">
+          Conception et étude des systèmes constructifs et charpentes en bois.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">📐</div>
+        <h3 data-fr="Plans d'exécution" data-en="Construction drawings">Plans d'exécution</h3>
+        <p data-fr="Plans de coffrage, plans d'armatures et documents techniques nécessaires à l'exécution."
+           data-en="Formwork drawings, reinforcement drawings and technical documents for construction.">
+          Plans de coffrage, plans d'armatures et documents techniques nécessaires à l'exécution.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🏠</div>
+        <h3 data-fr="Permis de construire" data-en="Building permits">Permis de construire</h3>
+        <p data-fr="Accompagnement dans la préparation des documents graphiques et techniques de vos projets."
+           data-en="Support in preparing graphic and technical documentation for your projects.">
+          Accompagnement dans la préparation des documents graphiques et techniques de vos projets.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🎓</div>
+        <h3 data-fr="Formation" data-en="Training">Formation</h3>
+        <p data-fr="Formation en études de structures et en modélisation BIM avec Revit."
+           data-en="Training in structural engineering and BIM modelling with Revit.">
+          Formation en études de structures et en modélisation BIM avec Revit.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- BIM -->
+<section id="bim">
+  <div class="container bim-grid">
+
+    <div class="bim-visual">
+      <div>
+        <div class="eyebrow" style="color:#72b7ff"
+             data-fr="BIM · REVIT"
+             data-en="BIM · REVIT">
+          BIM · REVIT
+        </div>
+
+        <h3 style="font-size:2rem"
+            data-fr="La structure pensée en données."
+            data-en="Structure driven by data.">
+          La structure pensée en données.
+        </h3>
+      </div>
+
+      <div class="wireframe"></div>
+
+      <p style="color:#b9c8d9"
+         data-fr="Coordination, modélisation et production de documents techniques à partir d'une maquette numérique."
+         data-en="Coordination, modelling and technical documentation based on a digital building model.">
+        Coordination, modélisation et production de documents techniques à partir d'une maquette numérique.
+      </p>
+    </div>
+
+    <div>
+      <div class="section-label">BIM & REVIT</div>
+
+      <h2 data-fr="Modéliser pour mieux concevoir et coordonner"
+          data-en="Model to design and coordinate better">
+        Modéliser pour mieux concevoir et coordonner
+      </h2>
+
+      <p class="section-intro"
+         data-fr="La modélisation BIM permet de développer une approche plus précise, collaborative et structurée du projet de construction."
+         data-en="BIM modelling enables a more accurate, collaborative and structured approach to construction projects.">
+        La modélisation BIM permet de développer une approche plus précise, collaborative et structurée du projet de construction.
+      </p>
+
+      <ul class="bim-list">
+        <li data-fr="Modélisation BIM des bâtiments" data-en="Building BIM modelling">Modélisation BIM des bâtiments</li>
+        <li data-fr="Modélisation des éléments structurels" data-en="Structural element modelling">Modélisation des éléments structurels</li>
+        <li data-fr="Production de plans depuis la maquette" data-en="Drawing production from BIM models">Production de plans depuis la maquette</li>
+        <li data-fr="Formation Revit" data-en="Revit training">Formation Revit</li>
+        <li data-fr="Coordination et organisation des modèles" data-en="Model coordination and organisation">Coordination et organisation des modèles</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section-light" id="projects">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-label" data-fr="Réalisations" data-en="Projects">Réalisations</div>
+
+      <h2 data-fr="Vos futurs projets seront ici"
+          data-en="Your future projects will be showcased here">
+        Vos futurs projets seront ici
+      </h2>
+
+      <p class="section-intro"
+         data-fr="Cette section est prête à accueillir vos projets, photos de chantier, maquettes BIM et études réalisées."
+         data-en="This section is ready to showcase your projects, construction photos, BIM models and engineering studies.">
+        Cette section est prête à accueillir vos projets, photos de chantier, maquettes BIM et études réalisées.
+      </p>
+    </div>
+
+    <div class="projects">
+
+      <article class="project">
+        <div class="project-content">
+          <small data-fr="Projet à venir" data-en="Coming project">Projet à venir</small>
+          <h3 data-fr="Bâtiment résidentiel" data-en="Residential building">Bâtiment résidentiel</h3>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-content">
+          <small data-fr="Projet à venir" data-en="Coming project">Projet à venir</small>
+          <h3 data-fr="Structure métallique" data-en="Steel structure">Structure métallique</h3>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-content">
+          <small data-fr="Projet à venir" data-en="Coming project">Projet à venir</small>
+          <h3 data-fr="Modélisation BIM" data-en="BIM modelling">Modélisation BIM</h3>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container about-grid">
+
+    <div>
+      <div class="section-label" data-fr="À propos" data-en="About us">À propos</div>
+
+      <h2 data-fr="Une ingénierie moderne, précise et collaborative"
+          data-en="Modern, accurate and collaborative engineering">
+        Une ingénierie moderne, précise et collaborative
+      </h2>
+
+      <p class="section-intro"
+         data-fr="Basé dans la région de Toulouse, STRUCTURA BIM accompagne les professionnels et porteurs de projets dans leurs besoins en ingénierie des structures et modélisation numérique."
+         data-en="Based in the Toulouse region, STRUCTURA BIM supports professionals and project owners with structural engineering and digital modelling needs.">
+        Basé dans la région de Toulouse, STRUCTURA BIM accompagne les professionnels et porteurs de projets dans leurs besoins en ingénierie des structures et modélisation numérique.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>01</strong>
+          <span data-fr="Bureau d'études" data-en="Engineering consultancy">Bureau d'études</span>
+        </div>
+
+        <div class="stat">
+          <strong>FR / EN</strong>
+          <span data-fr="Communication bilingue" data-en="Bilingual communication">Communication bilingue</span>
+        </div>
+
+        <div class="stat">
+          <strong>BIM</strong>
+          <span data-fr="Approche numérique" data-en="Digital approach">Approche numérique</span>
+        </div>
+
+        <div class="stat">
+          <strong>∞</strong>
+          <span data-fr="Projets à construire" data-en="Projects to build">Projets à construire</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:45px">
+      <div class="card-icon">🎯</div>
+
+      <h3 data-fr="Notre approche" data-en="Our approach">Notre approche</h3>
+
+      <p data-fr="Chaque projet nécessite une compréhension précise des contraintes architecturales, techniques et constructives. Notre objectif est de proposer une ingénierie structurée, claire et adaptée aux besoins du projet."
+         data-en="Every project requires a precise understanding of architectural, technical and construction constraints. Our goal is to provide clear, structured engineering adapted to each project's needs.">
+        Chaque projet nécessite une compréhension précise des contraintes architecturales, techniques et constructives. Notre objectif est de proposer une ingénierie structurée, claire et adaptée aux besoins du projet.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section-light" id="contact">
+  <div class="container">
+
+    <div class="contact-box">
+
+      <div>
+        <div class="section-label" style="color:#72b7ff"
+             data-fr="Contact"
+             data-en="Contact">
+          Contact
+        </div>
+
+        <h2 data-fr="Parlons de votre projet"
+            data-en="Let's discuss your project">
+          Parlons de votre projet
+        </h2>
+
+        <p data-fr="Vous avez un projet de construction, une étude de structure ou un besoin en modélisation BIM ? Contactez-nous."
+           data-en="Do you have a construction project, a structural engineering requirement or a BIM modelling need? Get in touch with us.">
+          Vous avez un projet de construction, une étude de structure ou un besoin en modélisation BIM ? Contactez-nous.
+        </p>
+
+        <div class="contact-info">
+          <p>📍 <strong data-fr="Toulouse & Occitanie" data-en="Toulouse & Occitanie">Toulouse & Occitanie</strong></p>
+          <p>✉️ <span data-fr="E-mail : à venir" data-en="Email: coming soon">E-mail : à venir</span></p>
+          <p>📞 <span data-fr="Téléphone : à venir" data-en="Phone: coming soon">Téléphone : à venir</span></p>
+        </div>
+      </div>
+
+      <form onsubmit="sendForm(event)">
+        <input type="text" placeholder="Nom / Name" required>
+        <input type="email" placeholder="E-mail" required>
+        <input type="text" placeholder="Entreprise / Company">
+        <textarea placeholder="Votre projet / Your project" required></textarea>
+
+        <button class="btn btn-primary" type="submit"
+                data-fr="Envoyer la demande"
+                data-en="Send enquiry">
+          Envoyer la demande
+        </button>
+
+        <p id="formMessage" style="font-size:.85rem;color:#9acbff"></p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-content">
+    <p>© 2026 STRUCTURA BIM — <span data-fr="Nom provisoire" data-en="Temporary name">Nom provisoire</span></p>
+    <p data-fr="Bureau d'études structures & BIM · Toulouse"
+       data-en="Structural Engineering & BIM Consultancy · Toulouse">
+      Bureau d'études structures & BIM · Toulouse
+    </p>
+  </div>
+</footer>
+
+<script>
+  let currentLang = "fr";
+
+  const frBtn = document.getElementById("frBtn");
+  const enBtn = document.getElementById("enBtn");
+
+  function changeLanguage(lang) {
+    currentLang = lang;
+
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll("[data-fr][data-en]").forEach(element => {
+      const content = element.getAttribute("data-" + lang);
+
+      if (content) {
+        element.innerHTML = content;
+      }
+    });
+
+    frBtn.classList.toggle("active", lang === "fr");
+    enBtn.classList.toggle("active", lang === "en");
+
+    document.title = lang === "fr"
+      ? "STRUCTURA BIM | Bureau d'Études Structures & BIM"
+      : "STRUCTURA BIM | Structural Engineering & BIM Consultancy";
+  }
+
+  frBtn.addEventListener("click", () => changeLanguage("fr"));
+  enBtn.addEventListener("click", () => changeLanguage("en"));
+
+  function sendForm(event) {
+    event.preventDefault();
+
+    const message = document.getElementById("formMessage");
+
+    message.textContent = currentLang === "fr"
+      ? "Formulaire de démonstration : connectez-le plus tard à votre adresse e-mail ou à un service de formulaire."
+      : "Demo form: you can later connect it to your email address or a form service.";
+
+    event.target.reset();
+  }
+</script>
+
+</body>
+</html>
